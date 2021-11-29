@@ -1,0 +1,35 @@
+{
+    "0x2a": {
+        "native": {
+            "usd": "0x9326BFA02ADD2366b30bacB125260Af641031331"
+        },
+        "link": {
+            "usd": "0x396c5E36DD0a0F5a5D33dae44368D4193f69a1F0"
+        },
+        "uni": {
+            "usd": "0xDA5904BdBfB4EF12a3955aEcA103F51dc87c7C39"
+        },
+        "dai": {
+            "usd": "0x777A68032a88E5A84678A77Af2CD65A7b3c0775a"
+        }
+    },
+    "0x61": {
+        "native": {
+            "usd": "0x2514895c72f50D8bd4B4F9b1110F0D6bD2c97526"
+        },
+        "link": {
+            "usd": "0x1B329402Cb1825C6F30A0d92aB9E2862BE47333f"
+        },
+        "dai": {
+            "usd": "0xE4eE17114774713d2De0eC0f035d4F7665fc025D"
+        }
+    },
+    "0x13881": {
+        "native": {
+            "usd": "0x0715A7794a1dc8e42615F059dD6e406A6594651A"
+        },
+        "dai": {
+            "usd": "0x0FCAa9c899EC5A91eBc3D5Dd869De833b06fB046"
+        }
+    }
+}

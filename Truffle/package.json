@@ -1,0 +1,25 @@
+{
+  "name": "moralis-betting-protocol-contracts",
+  "version": "1.0.0",
+  "main": "truffle-config.js",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "@chainlink/contracts": "^0.2.2",
+    "@openzeppelin/contracts": "^4.3.2"
+  },
+  "scripts": {
+    "compile": "truffle compile",
+    "develop": "truffle develop",
+    "console": "truffle console",
+    "test": "truffle test",
+    "migrate": "truffle migrate",
+    "verify": "truffle run verify BettingGameRegistry ERC20Basic PriceConverter"
+  },
+  "devDependencies": {
+    "@chainlink/test-helpers": "^0.0.7-alpha",
+    "@openzeppelin/test-helpers": "^0.5.15",
+    "@truffle/hdwallet-provider": "^1.6.0",
+    "truffle-plugin-verify": "^0.5.17"
+  }
+}

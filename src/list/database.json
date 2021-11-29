@@ -1,0 +1,11 @@
+{
+    "0x2a": {
+        "bettingGameCreated": "BettingGameCreatedKovan"
+    },
+    "0x61": {
+        "bettingGameCreated": "BettingGameCreatedBSCTestnet"
+    },
+    "0x13881": {
+        "bettingGameCreated": "BettingGameCreatedPolygonMumbai"
+    }
+}

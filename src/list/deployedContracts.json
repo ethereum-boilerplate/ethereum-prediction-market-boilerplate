@@ -1,0 +1,17 @@
+{
+    "0x2a": {
+        "erc20Basic": "0xBF7Eb55575bE9166A9aa81Cb73a729c541072DCD",
+        "bettingGameRegistry": "0x49e94DB243d93c8484Da21C1E436b52452Ac7ea5",
+        "priceConverter": "0xb4487B6697e68CAFE0a7381D4E5e5324A86738E4"
+    },
+    "0x61": {
+        "erc20Basic": "0x73589aC0517f3d0Eabef0081526e705f6F4D8023",
+        "bettingGameRegistry": "0x72C40dc04cbbb98a22D17b8939D6Db143A7eaD5e",
+        "priceConverter": "0xb94B9E14A9EA3C6fcfc0175ce80723A07Fb0DE65"
+    },
+    "0x13881": {
+        "erc20Basic": "0x73589aC0517f3d0Eabef0081526e705f6F4D8023",
+        "bettingGameRegistry": "0xB2914c1808e053783a148bCaA5375EA2659D0233",
+        "priceConverter": "0xb94B9E14A9EA3C6fcfc0175ce80723A07Fb0DE65"
+    }
+}

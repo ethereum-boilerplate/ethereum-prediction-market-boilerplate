@@ -1,0 +1,32 @@
+{
+    "0x2a": {
+        "uni": "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984",
+        "link": "0xa36085f69e2889c224210f603d836748e7dc0088",
+        "dai": "0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa"
+    },
+    "0x61": {
+        "uni": "",
+        "link": "0x84b9b910527ad5c03a9ca831909e21e236ea7b06",
+        "dai": ""
+    },
+    "0x13881": {
+        "uni": "",
+        "link": "0x326C977E6efc84E512bB9C30f76E30c160eD06FB",
+        "dai": ""
+    },
+    "0x1": {
+        "uni": "0x1f9840a85d5af5bf1d1762f925bdaddc4201f984",
+        "link": "0x514910771af9ca656af840dff83e8264ecf986ca",
+        "dai": "0x6b175474e89094c44da98b954eedeac495271d0f"
+    },
+    "0x38": {
+        "uni": "",
+        "link": "",
+        "dai": ""
+    },
+    "0x89": {
+        "uni": "",
+        "link": "0xb0897686c545045afc77cf20ec7a532e3120e0f1",
+        "dai": ""
+    }
+}
