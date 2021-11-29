@@ -1,30 +1,21 @@
 import React, { useMemo } from "react";
 import { Space, Typography, Button } from "antd";
-import { useWeb3Contract } from "hooks/useWeb3Contract";
-import BettingGameABI from "contracts/BettingGame.json";
+// import { useWeb3Contract } from "hooks/useWeb3Contract";
+// import BettingGameABI from "contracts/BettingGame.json";
 
 export default function PlayGame(props) {
-  const { handleNext, isCreator, bettingGameAddress } = props;
-  const { abi: bettingGameABI } = BettingGameABI;
+  const { /*handleNext*/ isCreator /*bettingGameAddress*/ } = props;
+  // const { abi: bettingGameABI } = BettingGameABI;
 
   /**
+   * [useWeb3Contract]
    * @description Play the betting game
+   *
+   * @function play
+   * @contractAddress BettingGame contract address (`bettingGameAddress`)
    */
-  const {
-    runContractFunction: runPlayGame,
-    isLoading: isPlayingLoading,
-    isRunning: isPlayingRunning,
-  } = useWeb3Contract({
-    abi: bettingGameABI,
-    contractAddress: bettingGameAddress,
-    functionName: "play",
-    params: {},
-  });
 
-  const disableButton = useMemo(
-    () => isPlayingLoading || isPlayingRunning,
-    [isPlayingLoading, isPlayingRunning]
-  );
+  const disableButton = useMemo(() => false, []);
 
   return (
     <Space direction="vertical" align="center" size="middle">
@@ -38,9 +29,7 @@ export default function PlayGame(props) {
         disabled={disableButton}
         loading={disableButton}
         style={{ width: "100%" }}
-        onClick={() => {
-          runPlayGame({ onSuccess: () => handleNext() });
-        }}
+        onClick={() => {}}
       >
         Bet now!
       </Button>

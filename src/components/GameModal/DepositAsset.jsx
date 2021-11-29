@@ -1,11 +1,11 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { Space, Typography, Select, Button } from "antd";
-import { useWeb3Contract } from "hooks/useWeb3Contract";
-import ERC20ABI from "contracts/ERC20.json";
-import PriceConverterABI from "contracts/PriceConverter.json";
-import BettingGameABI from "contracts/BettingGame.json";
-import deployedContracts from "list/deployedContracts.json";
-import chainlinkPriceFeeds from "list/chainlinkPriceFeeds.json";
+// import { useWeb3Contract } from "hooks/useWeb3Contract";
+// import ERC20ABI from "contracts/ERC20.json";
+// import PriceConverterABI from "contracts/PriceConverter.json";
+// import BettingGameABI from "contracts/BettingGame.json";
+// import deployedContracts from "list/deployedContracts.json";
+// import chainlinkPriceFeeds from "list/chainlinkPriceFeeds.json";
 import erc20TokenAddress from "list/erc20TokenAddress.json";
 import { useMoralisDapp } from "providers/MoralisDappProvider/MoralisDappProvider";
 import { networkConfigs } from "helpers/networks";
@@ -17,92 +17,55 @@ export default function DepositAsset(props) {
     initialDepositAsset,
     sides,
     handleNext,
-    bettingGameAddress,
+    // bettingGameAddress,
     isCreator,
   } = props;
   const { chainId } = useMoralisDapp();
-  const { fetchNativeTokenPrice, nativeTokenPrice } = useNativeTokenPrice();
-  const { abi: erc20ABI } = ERC20ABI;
-  const { abi: priceConverterABI } = PriceConverterABI;
-  const { abi: bettingGameABI } = BettingGameABI;
-  const [isApproved, setIsApproved] = useState(false);
-  const [isDeposited, setIsDeposited] = useState(false);
+  const { /*fetchNativeTokenPrice*/ nativeTokenPrice } = useNativeTokenPrice();
+  // const { abi: erc20ABI } = ERC20ABI;
+  // const { abi: priceConverterABI } = PriceConverterABI;
+  // const { abi: bettingGameABI } = BettingGameABI;
+  const [isApproved] = useState(false);
+  const [isDeposited] = useState(false);
   const [depositAsset, setDepositAsset] = useState("native");
 
   /**
+   * [useWeb3Contract]
    * @description Get pricing for ETH/BSC/MATIC to UNI/LINK/DAI
+   *
+   * @function getDerivedPrice
+   * @contractAddress Price Converter smart contract address
+   * @param _base - Chainlink Native/USD price feeds address
+   * @param _quote - Chainlink Depoit Asset(UNI/LINK/DAI)/USD price feeds address
+   * @param _decimals - 18
    */
-  const {
-    contractResponse: depositAmount,
-    runContractFunction: runGetPriceConverter,
-    isLoading: isPriceConverterLoading,
-    isRunning: isPriceConverterRunning,
-  } = useWeb3Contract({
-    abi: priceConverterABI,
-    contractAddress: deployedContracts[chainId].priceConverter,
-    functionName: "getDerivedPrice",
-    params: {
-      _base: chainlinkPriceFeeds[chainId]?.native?.usd,
-      _quote: chainlinkPriceFeeds[chainId][depositAsset]?.usd,
-      _decimals: 18,
-    },
-  });
 
   /**
+   * [useWeb3Contract]
    * @description Approve ERC20 token before depositing into smart contract
+   *
+   * @function approve
+   * @contractAddress ERC20 token address (UNI/LINK/DAI)
+   * @param spender - Betting Game Smart Contract address (`bettingGameAddress`)
+   * @param amount - Token amount want to be deposited (in wei); Get the value from `runPriceConverter` result
    */
-  const {
-    runContractFunction: runApprove,
-    isLoading: isApproveLoading,
-    isRunning: isApproveRunning,
-  } = useWeb3Contract({
-    abi: erc20ABI,
-    contractAddress: erc20TokenAddress[chainId][depositAsset],
-    functionName: "approve",
-    params: {
-      spender: bettingGameAddress,
-      amount: depositAmount ?? 0,
-    },
-  });
 
   /**
+   * [useWeb3Contract]
    * @description Deposit ERC20 token to BettingGame smart contract
+   *
+   * @function deposit
+   * @contractAddress Betting Game smart contract address (`bettingGameAddress`)
+   * @param _tokenAddress - ERC20 token address (UNI/LINK/DAI)
+   * @param _baseAddress - Chainlink Native/USD price feeds address
+   * @param _quoteAddress - Chainlink Depoit Asset(UNI/LINK/DAI)/USD price feeds address
    */
-  const {
-    runContractFunction: runDeposit,
-    isLoading: isDepositLoading,
-    isRunning: isDepositRunning,
-  } = useWeb3Contract({
-    abi: bettingGameABI,
-    contractAddress: bettingGameAddress,
-    functionName: "deposit",
-    params: {
-      _tokenAddress: erc20TokenAddress[chainId][depositAsset],
-      _baseAddress: chainlinkPriceFeeds[chainId]?.native?.usd,
-      _quoteAddress: chainlinkPriceFeeds[chainId][depositAsset]?.usd,
-    },
-  });
 
-  const disableButton = useMemo(
-    () =>
-      isPriceConverterLoading ||
-      isPriceConverterRunning ||
-      isApproveRunning ||
-      isApproveLoading ||
-      isDepositLoading ||
-      isDepositRunning,
-    [
-      isPriceConverterLoading,
-      isPriceConverterRunning,
-      isApproveLoading,
-      isApproveRunning,
-      isDepositLoading,
-      isDepositRunning,
-    ]
-  );
+  const disableButton = useMemo(() => false, []);
 
   useEffect(() => {
     if (depositAsset !== "native") {
+      // eslint-disable-next-line
       const options = () => {
         switch (chainId) {
           case "0x61":
@@ -125,9 +88,9 @@ export default function DepositAsset(props) {
       };
 
       // Fetch for Web3 API
-      fetchNativeTokenPrice(options());
+      // fetchNativeTokenPrice(options());
       // Fetch from Chainlink Price Feeds
-      runGetPriceConverter();
+      // runGetPriceConverter();
     }
     // eslint-disable-next-line
   }, [depositAsset]);
@@ -202,13 +165,9 @@ export default function DepositAsset(props) {
         disabled={disableButton}
         onClick={() => {
           if (isApproved) {
-            runDeposit({
-              onSuccess: () => setIsDeposited(true),
-            });
+            // Run Deposit
           } else {
-            runApprove({
-              onSuccess: () => setIsApproved(true),
-            });
+            // Run Approve
           }
         }}
       >

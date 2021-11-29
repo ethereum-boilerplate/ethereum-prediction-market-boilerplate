@@ -1,128 +1,101 @@
-import React, { useMemo, useEffect } from "react";
-import { Card, Typography, Button, Space, Skeleton } from "antd";
-import {
-  useMoralis,
-  useMoralisWeb3Api,
-  useMoralisWeb3ApiCall,
-} from "react-moralis";
-import moment from "moment";
+import React, { useMemo } from "react";
+import { Card, Button, Skeleton } from "antd";
+// import {
+//   useMoralis,
+//   useMoralisWeb3Api,
+//   useMoralisWeb3ApiCall,
+// } from "react-moralis";
+// import moment from "moment";
 import { getEllipsisTxt } from "helpers/formatters";
-import { useWeb3Contract } from "hooks/useWeb3Contract";
-import BettingGameABI from "contracts/BettingGame.json";
+// import { useWeb3Contract } from "hooks/useWeb3Contract";
+// import BettingGameABI from "contracts/BettingGame.json";
 import { useMoralisDapp } from "providers/MoralisDappProvider/MoralisDappProvider";
 import { networkConfigs } from "helpers/networks";
-import isZeroAddress from "helpers/validators";
+// import isZeroAddress from "helpers/validators";
 
 export default function CardIndex(props) {
-  const { cardTitle, handleChallenge } = props;
-  const { isInitialized, isAuthenticated } = useMoralis();
-  const { walletAddress, chainId } = useMoralisDapp();
-  const Web3Api = useMoralisWeb3Api();
-  const { abi } = BettingGameABI;
-
-  const {
-    fetch: runGetTokenMetadata,
-    data: getTokenMetadata,
-    isLoading: isGettingTokenMetadataLoading,
-    isFetching: isGettingTokenMetadataFetching,
-  } = useMoralisWeb3ApiCall(Web3Api.token.getTokenMetadata);
+  const { cardTitle /*handleChallenge*/ } = props;
+  // const { isInitialized, isAuthenticated } = useMoralis();
+  const { chainId } = useMoralisDapp();
+  // const Web3Api = useMoralisWeb3Api();
+  // const { abi } = BettingGameABI;
 
   /**
+   * [useMoralisWeb3ApiCall]
+   * @description Get Token Metadata
+   */
+
+  /**
+   * [useWeb3Contract]
    * @description Get Betting Game Info Details to be displayed
+   *
+   * @function getBettingGameInfo
+   * @contractAddress BettingGame contract address (`cardTitle`)
    */
-  const {
-    runContractFunction: runGetBettingGameInfo,
-    contractResponse,
-    isLoading: isGetBettingGameLoading,
-    isRunning: isGetBettingGameRunning,
-  } = useWeb3Contract({
-    abi,
-    functionName: "getBettingGameInfo",
-    contractAddress: cardTitle,
-    params: {},
-  });
 
   /**
+   * [useWeb3Contract]
    * @description Withdraw ERC20 tokens (reward) from the BettingGame for winners only
+   *
+   * @function withdraw
+   * @contractAddress  BettingGame contract address (`cardTitle`)
    */
-  const {
-    runContractFunction: runWithdraw,
-    isLoading: isWithdrawLoading,
-    isRunning: isWithdrawRunning,
-  } = useWeb3Contract({
-    abi,
-    functionName: "withdraw",
-    contractAddress: cardTitle,
-    params: {},
-  });
 
-  const isFetching = useMemo(
-    () =>
-      isGetBettingGameLoading ||
-      isGetBettingGameRunning ||
-      isGettingTokenMetadataFetching ||
-      isGettingTokenMetadataLoading,
-    [
-      isGetBettingGameLoading,
-      isGetBettingGameRunning,
-      isGettingTokenMetadataLoading,
-      isGettingTokenMetadataFetching,
-    ]
-  );
+  const isFetching = useMemo(() => false, []);
 
-  const isContractResponseValid = useMemo(
-    () => contractResponse && Object.keys(contractResponse).length === 10,
-    [contractResponse]
-  );
+  // const isContractResponseValid = useMemo(
+  //   () => contractResponse && Object.keys(contractResponse).length === 10,
+  //   [contractResponse]
+  // );
 
-  const isCreator = useMemo(
-    () =>
-      isContractResponseValid &&
-      contractResponse[0].toLowerCase() === walletAddress,
-    [isContractResponseValid, contractResponse, walletAddress]
-  );
+  // const isCreator = useMemo(
+  //   () =>
+  //     isContractResponseValid &&
+  //     contractResponse[0].toLowerCase() === walletAddress,
+  //   [isContractResponseValid, contractResponse, walletAddress]
+  // );
 
-  const isChallenger = useMemo(
-    () =>
-      isContractResponseValid &&
-      contractResponse[1].toLowerCase() === walletAddress,
-    [isContractResponseValid, contractResponse, walletAddress]
-  );
+  // const isChallenger = useMemo(
+  //   () =>
+  //     isContractResponseValid &&
+  //     contractResponse[1].toLowerCase() === walletAddress,
+  //   [isContractResponseValid, contractResponse, walletAddress]
+  // );
 
-  const isWinner = useMemo(
-    () =>
-      isContractResponseValid &&
-      contractResponse[6].toLowerCase() === walletAddress,
-    [isContractResponseValid, contractResponse, walletAddress]
-  );
+  // const isWinner = useMemo(
+  //   () =>
+  //     isContractResponseValid &&
+  //     contractResponse[6].toLowerCase() === walletAddress,
+  //   [isContractResponseValid, contractResponse, walletAddress]
+  // );
 
-  const isWithdrawn = useMemo(
-    () => isContractResponseValid && contractResponse[7],
-    [isContractResponseValid, contractResponse]
-  );
+  // const isWithdrawn = useMemo(
+  //   () => isContractResponseValid && contractResponse[7],
+  //   [isContractResponseValid, contractResponse]
+  // );
 
-  const isExpired = useMemo(
-    () =>
-      isContractResponseValid &&
-      moment().isAfter(moment.unix(parseInt(contractResponse[4]))),
-    [isContractResponseValid, contractResponse]
-  );
+  // const isExpired = useMemo(
+  //   () =>
+  //     isContractResponseValid &&
+  //     moment().isAfter(moment.unix(parseInt(contractResponse[4]))),
+  //   [isContractResponseValid, contractResponse]
+  // );
 
-  useEffect(() => {
-    if (cardTitle && isInitialized) {
-      runGetBettingGameInfo();
-    }
-    // eslint-disable-next-line
-  }, [cardTitle, isInitialized, isAuthenticated]);
+  // useEffect(() => {
+  //   if (cardTitle && isInitialized) {
+  //     runGetBettingGameInfo();
+  //   }
+  //   // eslint-disable-next-line
+  // }, [cardTitle, isInitialized, isAuthenticated]);
 
-  useEffect(() => {
-    if (isContractResponseValid && !isZeroAddress(contractResponse[5])) {
-      runGetTokenMetadata({
-        params: { chain: chainId, addresses: contractResponse[5] },
-      });
-    }
-    // eslint-disable-next-line
-  }, [isContractResponseValid, contractResponse]);
+  // useEffect(() => {
+  //   if (isContractResponseValid && !isZeroAddress(contractResponse[5])) {
+  //     runGetTokenMetadata({
+  //       params: { chain: chainId, addresses: contractResponse[5] },
+  //     });
+  //   }
+  //   // eslint-disable-next-line
+  // }, [isContractResponseValid, contractResponse]);
 
   return (
     <Card
@@ -132,7 +105,7 @@ export default function CardIndex(props) {
       style={{ marginBottom: "2rem" }}
     >
       <Skeleton loading={isFetching}>
-        {isContractResponseValid && isAuthenticated ? (
+        {/* {isContractResponseValid && isAuthenticated ? (
           <>
             <div
               style={{
@@ -317,20 +290,20 @@ export default function CardIndex(props) {
               )}
             </Space>
           </>
-        ) : (
-          <Button
-            size="large"
-            type="default"
-            style={{ width: "100%" }}
-            onClick={() =>
-              window.open(
-                `${networkConfigs[chainId].blockExplorerUrl}address/${cardTitle}`
-              )
-            }
-          >
-            View Details
-          </Button>
-        )}
+        ) : ( */}
+        <Button
+          size="large"
+          type="default"
+          style={{ width: "100%" }}
+          onClick={() =>
+            window.open(
+              `${networkConfigs[chainId].blockExplorerUrl}address/${cardTitle}`
+            )
+          }
+        >
+          View Details
+        </Button>
+        {/* )} */}
       </Skeleton>
     </Card>
   );
