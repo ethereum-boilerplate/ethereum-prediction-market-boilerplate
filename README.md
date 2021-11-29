@@ -7,6 +7,9 @@ This Project is a fork of [Ethereum Boilerplate](https://github.com/ethereum-boi
 # ⭐️ `Star us`
 If this boilerplate helps you build Ethereum dapps faster - please star this project, every star makes us very happy!
 
+# 🤝 How to get help
+If you have any questions or need help running this project please don't hesitate to ask in our [forum](https://forum.moralis.io/t/ethereum-prediction-market-boilerplate-questions/5020). We are monitoring it 24/7 and are here to help you get up to speed.
+
 # 🚀 Quick Start
 
 📄 Clone or fork `ethereum-prediction-market-boilerplate`:
