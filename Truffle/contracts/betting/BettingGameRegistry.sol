@@ -61,9 +61,7 @@ contract BettingGameRegistry is Ownable {
         public
         view
         returns (address)
-    {
-        return bettingGameDataRegistry[_bettingGameId];
-    }
+    {}
 
     /**
      * Set Native Token Address (only owner access)
@@ -71,40 +69,14 @@ contract BettingGameRegistry is Ownable {
     function setNativeTokenAddress(address newNativeTokenAddress)
         public
         onlyOwner
-    {
-        nativeTokenAddress = newNativeTokenAddress;
-    }
+    {}
 
     /**
      * Create new `BettingGame` instance
      */
     function createGame(uint256 _sides) public {
         // 1. Burn some token
-        IERC20Burnable nativeToken = IERC20Burnable(nativeTokenAddress);
-        uint256 burnPrice = SafeMath.mul(0.01 * 10**18, _sides);
-        nativeToken.burnFrom(msg.sender, burnPrice);
-
         // 2. Create new `BettingGame` smart contract
-        BettingGame newBettingGame = new BettingGame(
-            vrfCoordinatorAddress,
-            linkTokenAddress,
-            keyHash,
-            fee,
-            msg.sender,
-            _sides,
-            nativeTokenAddress,
-            priceConverterAddress
-        );
-        bettingGameDataRegistry[bettingGameCount] = address(newBettingGame);
-
-        emit BettingGameCreated(
-            bettingGameCount,
-            msg.sender,
-            _sides,
-            address(newBettingGame)
-        );
-
         // 3. Increase Betting Game Counter
-        bettingGameCount = SafeMath.add(bettingGameCount, 1);
     }
 }
