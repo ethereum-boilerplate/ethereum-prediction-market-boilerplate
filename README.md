@@ -11,7 +11,7 @@ If this boilerplate helps you build Ethereum dapps faster - please star this pro
 
 📄 Clone or fork `ethereum-prediction-market-boilerplate`:
 ```sh
-git clone https://github.com/ethereum-boilerplate/ethereum-prediction-market-boilerplate`.git
+git clone https://github.com/ethereum-boilerplate/ethereum-prediction-market-boilerplate.git
 ```
 💿 Install all dependencies:
 ```sh
