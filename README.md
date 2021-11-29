@@ -2,7 +2,7 @@
 
 This Project is a fork of [Ethereum Boilerplate](https://github.com/ethereum-boilerplate/ethereum-boilerplate) and demostrates how you can build your own Ethereum Prediction Market. This project of course work on any EVM-compatible blockchain such as Polygon, Avalanche, Binance Smart Chain and other such chains.
 
-![dapp3](https://github.com/ethereum-boilerplate/ethereum-prediction-market-boilerplate/blob/master/prediction-market.gif)
+![dapp3](https://github.com/ethereum-boilerplate/ethereum-prediction-market-boilerplate/blob/master/display.gif)
 
 # ⭐️ `Star us`
 If this boilerplate helps you build Ethereum dapps faster - please star this project, every star makes us very happy!
